@@ -12,10 +12,6 @@ app.use(helmet())
 
 app.use(express.json())
 
-app.get("/", (req, res) => {
-    res.send("Hello")
-})
-
 app.use("/api", router)
 
 connectToDB().then(() => app.listen(config.app.port, () => console.log(`Listening on port ${config.app.port}`)))
