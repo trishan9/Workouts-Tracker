@@ -1,10 +1,12 @@
 import { Fragment, ReactElement } from "react";
 import { Navigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { tokenState } from "@/atoms/user";
 
 const ProtectedRoute = ({ children }: { children: ReactElement }) => {
-  const isLoggedIn = false;
+  const [token] = useRecoilState(tokenState);
 
-  if (!isLoggedIn) {
+  if (!token) {
     return <Navigate to="/login" replace />;
   }
 

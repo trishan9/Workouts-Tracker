@@ -54,11 +54,15 @@ const login = async (email, password) => {
 }
 
 const getMe = async (id) => {
-    const user = Users.findById(id)
+    const user = await Users.findById(id)
     if (!user) {
         throw Error("User doesn't exists!")
     }
-    return user
+    console.log(user)
+    return {
+        name: user.name,
+        email: user.email
+    }
 }
 
 export default { signup, login, getMe }
