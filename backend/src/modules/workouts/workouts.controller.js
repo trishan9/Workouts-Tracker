@@ -9,7 +9,7 @@ const getAllWorkouts = async (req, res) => {
             ...workouts
         })
     } catch (err) {
-        res.json({
+        res.status(404).json({
             success: false,
             error: err.message
         })
@@ -24,7 +24,7 @@ const getWorkout = async (req, res) => {
             workout
         })
     } catch (err) {
-        res.json({
+        res.status(404).json({
             success: false,
             error: err.message
         })
@@ -39,7 +39,7 @@ const createWorkout = async (req, res) => {
             success: true,
         })
     } catch (err) {
-        res.json({
+        res.status(404).json({
             success: false,
             error: err.message
         })
@@ -54,7 +54,7 @@ const deleteWorkout = async (req, res) => {
             success: true,
         })
     } catch (err) {
-        res.json({
+        res.status(404).json({
             success: false,
             error: err.message
         })
@@ -70,7 +70,7 @@ const updateWorkout = async (req, res) => {
             success: true,
         })
     } catch (err) {
-        res.json({
+        res.status(404).json({
             success: false,
             error: err.message
         })
