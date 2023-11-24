@@ -4,7 +4,7 @@ import { useRecoilState } from "recoil";
 import { tokenState } from "@/atoms/user";
 import SignupForm from "@/components/SignupForm";
 
-const Login: FC = () => {
+const Signup: FC = () => {
   const [token] = useRecoilState(tokenState);
 
   if (token) {
@@ -15,11 +15,11 @@ const Login: FC = () => {
     <div className="m-auto w-[30rem] my-32">
       <p className="mb-4 text-2xl">Create Workouts Tracker Account</p>
 
-      <div className="p-6 border rounded-md bg-secondary">
+      <div className="p-6 border rounded-md bg-background">
         <SignupForm />
       </div>
     </div>
   );
 };
 
-export default Login;
+export default Signup;

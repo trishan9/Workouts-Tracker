@@ -1,6 +1,4 @@
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,7 +7,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "./ui/button";
-import { tokenState, userState } from "@/atoms/user";
+import useLogout from "@/hooks/use-logout";
 
 interface User {
   user: {
@@ -19,16 +17,8 @@ interface User {
 }
 
 const UserAvatar = ({ user }: { user: User }) => {
-  const navigate = useNavigate();
-  const [, setToken] = useRecoilState(tokenState);
-  const [, setUser] = useRecoilState(userState);
-
-  const handleLogout = () => {
-    localStorage.clear();
-    setToken(null);
-    setUser(null);
-    navigate("/login");
-  };
+  const { logout } = useLogout();
+  const handleLogout = () => logout();
 
   return (
     <DropdownMenu>

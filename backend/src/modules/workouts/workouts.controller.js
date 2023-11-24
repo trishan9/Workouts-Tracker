@@ -34,7 +34,7 @@ const getWorkout = async (req, res) => {
 const createWorkout = async (req, res) => {
     try {
         const { title, reps, load } = req.body
-        await WorkoutsService.createWorkout(title, reps, load, res.locals.user._id)
+        await WorkoutsService.createWorkout(title, Number(reps), Number(load), res.locals.user._id)
         res.json({
             success: true,
         })

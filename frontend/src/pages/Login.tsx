@@ -15,7 +15,7 @@ const Login: FC = () => {
     <div className="m-auto w-[30rem] my-32">
       <p className="mb-4 text-2xl">Log in to Workouts Tracker</p>
 
-      <div className="p-6 border rounded-md bg-secondary">
+      <div className="p-6 border rounded-md bg-background">
         <LoginForm />
       </div>
     </div>
