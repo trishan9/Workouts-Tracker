@@ -6,6 +6,8 @@ import { tokenState } from "@/atoms/user";
 
 import LoginForm from "@/components/LoginForm";
 
+console.log(import.meta.env.VITE_VALUE);
+
 const Login: FC = () => {
   const [token] = useRecoilState(tokenState);
 

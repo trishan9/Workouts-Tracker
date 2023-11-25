@@ -3,6 +3,8 @@ import axios from "axios";
 import { useMutation } from "@tanstack/react-query";
 import { useToast } from "@/components/ui/use-toast";
 
+const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 interface SignupProps {
   name: string;
   email: string;
@@ -15,7 +17,7 @@ const useSignup = () => {
 
   const mutation = useMutation({
     mutationFn: async (payload: SignupProps) => {
-      return await axios.post("/api/auth/signup", payload);
+      return await axios.post(`${VITE_API_BASE_URL}/api/auth/signup`, payload);
     },
     onSuccess: () => {
       navigate("/login");

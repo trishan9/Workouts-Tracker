@@ -6,6 +6,8 @@ import { useToast } from "@/components/ui/use-toast";
 import { tokenState } from "@/atoms/user";
 import useGetUser from "./use-get-user";
 
+const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 interface LoginProps {
   email: string;
   password: string;
@@ -19,7 +21,7 @@ const useLogin = () => {
 
   const mutation = useMutation({
     mutationFn: async (payload: LoginProps) => {
-      return await axios.post("/api/auth/login", payload);
+      return await axios.post(`${VITE_API_BASE_URL}/api/auth/login`, payload);
     },
     onSuccess: (data) => {
       localStorage.setItem("userToken", JSON.stringify(data.data));

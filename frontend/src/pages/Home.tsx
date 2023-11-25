@@ -10,6 +10,8 @@ import WorkoutCard from "@/components/WorkoutCard";
 import AddWorkoutForm from "@/components/AddWorkoutForm";
 import { Button } from "@/components/ui/button";
 
+const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 interface WorkoutProps {
   _id: string;
   title: string;
@@ -24,7 +26,7 @@ const Home: FC = () => {
 
   const getWorkouts = async (pageNum?: number) => {
     const res = await axios.get(
-      `/api/workouts/?page=${pageNum ? pageNum : 1}`,
+      `${VITE_API_BASE_URL}/api/workouts/?page=${pageNum ? pageNum : 1}`,
       {
         headers: {
           Authorization: `Bearer ${token.token}`,

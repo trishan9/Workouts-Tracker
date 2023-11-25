@@ -4,6 +4,8 @@ import { useRecoilState } from "recoil";
 import { tokenState } from "@/atoms/user";
 import { toast } from "@/components/ui/use-toast";
 
+const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 interface WorkoutPayload {
   title: string;
   load: number;
@@ -16,7 +18,7 @@ const useWorkouts = () => {
 
   const addMutation = useMutation({
     mutationFn: async (payload: WorkoutPayload) => {
-      return await axios.post("/api/workouts", payload, {
+      return await axios.post(`${VITE_API_BASE_URL}/api/workouts`, payload, {
         headers: {
           Authorization: `Bearer ${token.token}`,
         },
@@ -37,7 +39,7 @@ const useWorkouts = () => {
 
   const deleteMutation = useMutation({
     mutationFn: async (id: string | undefined) => {
-      return await axios.delete(`/api/workouts/${id}`, {
+      return await axios.delete(`${VITE_API_BASE_URL}/api/workouts/${id}`, {
         headers: {
           Authorization: `Bearer ${token.token}`,
         },
