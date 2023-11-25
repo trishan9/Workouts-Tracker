@@ -23,7 +23,7 @@ const NavBar = () => {
 
   return (
     <nav className="flex items-center justify-between w-full p-6 bg-primary">
-      <h1 className="text-2xl text-primary-foreground">Workout Tracker</h1>
+      <h1 className="text-2xl text-primary-foreground">Workouts Tracker</h1>
 
       {!token && (
         <ul className="flex gap-8 text-[18px] font-medium text-primary-foreground items-center">

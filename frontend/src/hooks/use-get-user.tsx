@@ -18,9 +18,6 @@ const useGetUser = () => {
     onSuccess: (data) => {
       setUser(data.data);
     },
-    onError: (err) => {
-      console.log(err);
-    },
   });
 
   const getUser = () => {

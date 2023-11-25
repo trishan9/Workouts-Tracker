@@ -1,14 +1,12 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:opsz@9..40&display=swap");
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-* {
+@font-face {
   font-family: "DM Sans";
+  src: url("../assets/DMSans.ttf");
+  font-display: swap;
 }
-
-
 
 @layer base {
   :root {
@@ -76,7 +74,7 @@
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border font-primary;
   }
 
   body {

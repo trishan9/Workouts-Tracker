@@ -47,7 +47,7 @@ const AddWorkoutForm = () => {
   };
 
   return (
-    <Card className="w-[650px]">
+    <Card className="w-full sm:w-[650px] mb-6 sm:mb-0">
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <CardHeader>
           <CardTitle>Add Workout</CardTitle>
