@@ -1,13 +1,14 @@
 import { FC, Fragment, useEffect } from "react";
 import axios from "axios";
-import { useRecoilState } from "recoil";
 import { useQuery } from "@tanstack/react-query";
+import { useRecoilState } from "recoil";
 
 import workoutsState from "@/atoms/workouts";
 import { tokenState } from "@/atoms/user";
 
 import WorkoutCard from "@/components/WorkoutCard";
 import AddWorkoutForm from "@/components/AddWorkoutForm";
+import { Button } from "@/components/ui/button";
 
 interface WorkoutProps {
   _id: string;
@@ -21,17 +22,22 @@ const Home: FC = () => {
   const [token] = useRecoilState(tokenState);
   const [workouts, setWorkouts] = useRecoilState(workoutsState);
 
-  const getWorkouts = async (pageNum: number) => {
-    return await axios.get(`/api/workouts/?page=${pageNum}`, {
-      headers: {
-        Authorization: `Bearer ${token.token}`,
-      },
-    });
+  const getWorkouts = async (pageNum?: number) => {
+    const res = await axios.get(
+      `/api/workouts/?page=${pageNum ? pageNum : 1}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token.token}`,
+        },
+      }
+    );
+    if (pageNum) setWorkouts(res.data);
+    return res;
   };
 
   const { data, isLoading } = useQuery({
     queryKey: ["workouts"],
-    queryFn: () => getWorkouts(1),
+    queryFn: () => getWorkouts(),
   });
 
   useEffect(() => {
@@ -46,14 +52,43 @@ const Home: FC = () => {
         <Fragment>
           <AddWorkoutForm />
 
-          <div className="grid w-full grid-cols-1 gap-6 xl:grid-cols-2 2xl:grid-cols-3">
-            {workouts?.workouts?.map((data: WorkoutProps) => (
-              <WorkoutCard key={data._id} data={data} />
-            ))}
+          <div className="flex flex-col w-full gap-6">
+            <div className="grid w-full grid-cols-1 content-start gap-6 xl:grid-cols-2 2xl:grid-cols-3 min-h-[456px]">
+              {workouts?.workouts?.map((data: WorkoutProps) => (
+                <WorkoutCard key={data._id} data={data} />
+              ))}
+            </div>
 
-            <p>Current Page:{workouts.currentPage}</p>
+            <div className="flex items-center justify-between w-full col-span-1 text-lg xl:col-span-2 2xl:col-span-3 text-primary">
+              <p className="">
+                Showing{" "}
+                <span className="font-semibold">{workouts.pageData.from}</span>{" "}
+                to <span className="font-semibold">{workouts.pageData.to}</span>{" "}
+                of{" "}
+                <span className="font-semibold">
+                  {workouts.pageData.totalResults}
+                </span>{" "}
+                results
+              </p>
 
-            <p>Total Pages: {workouts.totalPages}</p>
+              <div className="flex gap-3">
+                <Button
+                  disabled={workouts.pageData.currentPage == 1}
+                  variant="outline"
+                  onClick={() => getWorkouts(workouts.pageData.currentPage - 1)}
+                >
+                  Previous
+                </Button>
+
+                <Button
+                  disabled={!workouts.pageData.hasNextPage}
+                  variant="outline"
+                  onClick={() => getWorkouts(workouts.pageData.currentPage + 1)}
+                >
+                  Next
+                </Button>
+              </div>
+            </div>
           </div>
         </Fragment>
       )}

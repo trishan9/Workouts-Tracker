@@ -1,10 +1,15 @@
 import { atom } from "recoil";
 
 interface WorkoutProps {
-  currentPage: number;
-  hasNextPage: boolean;
+  pageData: {
+    currentPage: number;
+    hasNextPage: boolean;
+    totalPages: number;
+    totalResults: number;
+    from: number;
+    to: number;
+  };
   success: boolean;
-  totalPages: number;
   workouts: [];
 }
 

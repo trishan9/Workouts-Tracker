@@ -21,7 +21,7 @@ const WorkoutCard = ({ data }: { data: WorkoutProps }) => {
   };
 
   return (
-    <div className="flex items-start justify-between p-6 bg-white border rounded-sm shadow-sm text-secondary-foreground">
+    <div className="flex items-start justify-between p-6 border rounded-sm shadow-sm h-fit bg-background text-secondary-foreground">
       <div>
         <p className="text-xl font-medium text-primary">{data.title}</p>
 
@@ -38,8 +38,8 @@ const WorkoutCard = ({ data }: { data: WorkoutProps }) => {
         </div>
       </div>
 
-      <div className="flex flex-col items-end justify-between h-full">
-        <p className="text-sm">{data.createdAt.slice(0, 10)}</p>
+      <div className="flex flex-col items-end">
+        <p className="mb-6 text-sm">{data.createdAt.slice(0, 10)}</p>
 
         <AlertDialog>
           <AlertDialogTrigger asChild>
