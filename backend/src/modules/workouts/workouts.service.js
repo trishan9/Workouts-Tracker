@@ -9,9 +9,14 @@ const getAllWorkouts = async (userId, page) => {
     const workouts = await Workouts.find({ userId }).sort({ "createdAt": -1 }).skip(skip).limit(limit)
     return {
         workouts,
-        totalPages,
-        currentPage: parseInt(page),
-        hasNextPage
+        pageData: {
+            totalPages,
+            currentPage: parseInt(page),
+            hasNextPage,
+            totalResults: totalWorkouts,
+            from: skip + 1,
+            to: totalWorkouts <= limit ? totalWorkouts : skip + workouts.length
+        }
     }
 }
 
