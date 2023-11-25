@@ -14,8 +14,10 @@ const Signup: FC = () => {
   }
 
   return (
-    <div className="m-auto w-[30rem] my-32">
-      <p className="mb-4 text-2xl">Create Workouts Tracker Account</p>
+    <div className="m-auto max-w-[30rem] my-32 px-6">
+      <p className="mb-4 text-xl sm:text-2xl">
+        Create Workouts Tracker Account
+      </p>
 
       <div className="p-6 border rounded-md bg-background">
         <SignupForm />
