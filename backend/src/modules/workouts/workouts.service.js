@@ -6,7 +6,7 @@ const getAllWorkouts = async (userId, page) => {
     const totalWorkouts = await Workouts.countDocuments({ userId })
     const totalPages = totalWorkouts <= limit ? 1 : Math.ceil(totalWorkouts / limit)
     const hasNextPage = parseInt(page) < parseInt(totalPages) ? true : false
-    const workouts = await Workouts.find({ userId }).skip(skip).limit(limit)
+    const workouts = await Workouts.find({ userId }).sort({ "createdAt": -1 }).skip(skip).limit(limit)
     return {
         workouts,
         totalPages,

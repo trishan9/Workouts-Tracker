@@ -1,11 +1,14 @@
 import { FC, Fragment, useEffect } from "react";
-import WorkoutCard from "@/components/WorkoutCard";
-import { useRecoilState } from "recoil";
-import workoutsState from "@/atoms/workouts";
-import { useQuery } from "@tanstack/react-query";
-import { tokenState } from "@/atoms/user";
 import axios from "axios";
+import { useRecoilState } from "recoil";
+import { useQuery } from "@tanstack/react-query";
+
+import workoutsState from "@/atoms/workouts";
+import { tokenState } from "@/atoms/user";
+
+import WorkoutCard from "@/components/WorkoutCard";
 import AddWorkoutForm from "@/components/AddWorkoutForm";
+
 interface WorkoutProps {
   _id: string;
   title: string;

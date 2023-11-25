@@ -1,6 +1,10 @@
+import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import * as z from "zod";
+
+import useLogin from "@/hooks/use-login";
+import spinner from "@/assets/spinner.gif";
+
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -11,7 +15,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import useLogin from "@/hooks/use-login";
 
 const formSchema = z.object({
   email: z.string().email("Must be valid email address").min(1, {
@@ -36,10 +39,6 @@ const LoginForm = () => {
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     loginUser(values);
   };
-
-  if (isPending) {
-    console.log("Loading...");
-  }
 
   return (
     <Form {...form}>
@@ -76,7 +75,14 @@ const LoginForm = () => {
           )}
         />
 
-        <Button type="submit">Log In</Button>
+        <Button
+          disabled={isPending}
+          type="submit"
+          className="flex items-center gap-2"
+        >
+          Log In
+          {isPending && <img src={spinner} className="w-6" />}
+        </Button>
       </form>
     </Form>
   );

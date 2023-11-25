@@ -1,8 +1,10 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
+
 import { tokenState, userState } from "@/atoms/user";
 import useGetUser from "@/hooks/use-get-user";
-import { useEffect } from "react";
+
 import UserAvatar from "./UserAvatar";
 
 const NavBar = () => {

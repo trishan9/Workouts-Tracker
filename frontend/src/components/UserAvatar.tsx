@@ -1,3 +1,5 @@
+import useLogout from "@/hooks/use-logout";
+
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -7,7 +9,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "./ui/button";
-import useLogout from "@/hooks/use-logout";
+import { AlertDialog, AlertDialogTrigger } from "@/components/ui/alert-dialog";
+import PopupAlert from "./PopupAlert";
 
 interface User {
   user: {
@@ -35,13 +38,15 @@ const UserAvatar = ({ user }: { user: User }) => {
 
         <DropdownMenuLabel>{user.user.email}</DropdownMenuLabel>
 
-        <Button
-          onClick={handleLogout}
-          className="m-2 my-4"
-          variant="destructive"
-        >
-          Log Out
-        </Button>
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <Button className="m-2 my-4" variant="destructive">
+              Log Out
+            </Button>
+          </AlertDialogTrigger>
+
+          <PopupAlert type="LOGOUT" handleClick={() => handleLogout()} />
+        </AlertDialog>
       </DropdownMenuContent>
     </DropdownMenu>
   );

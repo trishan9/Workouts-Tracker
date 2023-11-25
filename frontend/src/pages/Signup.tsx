@@ -1,7 +1,9 @@
 import { FC } from "react";
 import { Navigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
+
 import { tokenState } from "@/atoms/user";
+
 import SignupForm from "@/components/SignupForm";
 
 const Signup: FC = () => {

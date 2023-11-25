@@ -1,6 +1,7 @@
 import { Fragment, ReactElement } from "react";
 import { Navigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
+
 import { tokenState } from "@/atoms/user";
 
 const ProtectedRoute = ({ children }: { children: ReactElement }) => {

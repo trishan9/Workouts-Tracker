@@ -1,3 +1,10 @@
+import * as z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+
+import useWorkouts from "@/hooks/use-workouts";
+import spinner from "@/assets/spinner.gif";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -8,9 +15,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
 import {
   Form,
   FormControl,
@@ -33,17 +37,24 @@ const formSchema = z.object({
 });
 
 const AddWorkoutForm = () => {
+  const { isPending, addWorkout } = useWorkouts();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: "",
       load: "0",
-      reps: "0",
+      reps: "1",
     },
   });
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+    const payload = {
+      title: values.title,
+      load: values.load,
+      reps: values.reps,
+    };
+    //@ts-expect-error ignore
+    addWorkout(payload);
   };
 
   return (
@@ -122,7 +133,14 @@ const AddWorkoutForm = () => {
             Cancel
           </Button>
 
-          <Button type="submit">Add</Button>
+          <Button
+            className="flex items-center gap-2"
+            disabled={isPending}
+            type="submit"
+          >
+            Add
+            {isPending && <img src={spinner} className="w-6" />}
+          </Button>
         </CardFooter>
       </form>
     </Card>

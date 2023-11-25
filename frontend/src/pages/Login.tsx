@@ -1,8 +1,10 @@
 import { FC } from "react";
 import { Navigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import LoginForm from "@/components/LoginForm";
+
 import { tokenState } from "@/atoms/user";
+
+import LoginForm from "@/components/LoginForm";
 
 const Login: FC = () => {
   const [token] = useRecoilState(tokenState);
