@@ -3,9 +3,10 @@ import validator from "validator"
 import Users from "../../db/models/users.js"
 import hash from "../../lib/hash.js"
 import token from "../../lib/token.js"
+import uploadToCloudinary from "../../lib/cloudinary.js"
 
-const signup = async (name, email, password) => {
-    if (!email || !name || !password) {
+const signup = async (name, email, password, avatar) => {
+    if (!email || !name || !password || !avatar) {
         throw Error("All the fields are required")
     }
 
@@ -17,9 +18,9 @@ const signup = async (name, email, password) => {
     if (exists) {
         throw Error("User with this email address already exists")
     }
-
+    const avatarUrl = await uploadToCloudinary(avatar)
     const hashedPassword = await hash.generate(password)
-    const user = await Users.create({ name, email, password: hashedPassword })
+    const user = await Users.create({ name, email, password: hashedPassword, avatar: avatarUrl.secure_url })
     return user
 }
 

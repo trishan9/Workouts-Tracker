@@ -2,8 +2,9 @@ import AuthService from "./auth.service.js"
 
 const signup = async (req, res) => {
     const { name, email, password } = req.body
+    const avatar = req.file?.path
     try {
-        await AuthService.signup(name, email, password)
+        await AuthService.signup(name, email, password, avatar)
         res.json({
             success: true,
         })
