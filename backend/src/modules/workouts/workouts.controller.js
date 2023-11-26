@@ -3,7 +3,7 @@ import WorkoutsService from "./workouts.service.js"
 const getAllWorkouts = async (req, res) => {
     try {
         const userId = res.locals.user._id
-        const workouts = await WorkoutsService.getAllWorkouts(userId, req.query.page)
+        const workouts = await WorkoutsService.getAllWorkouts(userId, req.query)
         res.json({
             success: true,
             ...workouts

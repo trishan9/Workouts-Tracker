@@ -1,12 +1,20 @@
 import Workouts from "../../db/models/workouts.js"
 import getPagination from "../../utils/pagination.js"
 
-const getAllWorkouts = async (userId, page) => {
+const SORT_METHODS = {
+    "title-asc": "title",
+    "title-desc": "-title",
+    "date-asc": "createdAt",
+    "date-desc": "-createdAt"
+}
+
+const getAllWorkouts = async (userId, query) => {
+    const { page, sortBy } = query
     const { limit, skip } = getPagination(page)
     const totalWorkouts = await Workouts.countDocuments({ userId })
     const totalPages = totalWorkouts <= limit ? 1 : Math.ceil(totalWorkouts / limit)
     const hasNextPage = parseInt(page) < parseInt(totalPages) ? true : false
-    const workouts = await Workouts.find({ userId }).sort({ "createdAt": -1 }).skip(skip).limit(limit)
+    const workouts = await Workouts.find({ userId }).sort(sortBy ? SORT_METHODS[sortBy] : { "createdAt": -1 }).skip(skip).limit(limit)
     return {
         workouts,
         pageData: {
