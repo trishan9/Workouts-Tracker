@@ -3,7 +3,7 @@ import { Trash2Icon } from "lucide-react";
 import useWorkouts from "@/hooks/use-workouts";
 
 import { AlertDialog, AlertDialogTrigger } from "@/components/ui/alert-dialog";
-import PopupAlert from "./PopupAlert";
+import PopupAlert from "../PopupAlert";
 
 interface WorkoutProps {
   _id?: string;

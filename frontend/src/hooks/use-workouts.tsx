@@ -2,6 +2,7 @@ import axios from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRecoilState } from "recoil";
 import { tokenState } from "@/atoms/user";
+import { selectOptionState, sortState } from "@/atoms/workouts";
 import { toast } from "@/components/ui/use-toast";
 
 const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -15,6 +16,8 @@ interface WorkoutPayload {
 const useWorkouts = () => {
   const queryClient = useQueryClient();
   const [token] = useRecoilState(tokenState);
+  const [, setSelectOption] = useRecoilState(selectOptionState);
+  const [, setSort] = useRecoilState(sortState);
 
   const addMutation = useMutation({
     mutationFn: async (payload: WorkoutPayload) => {
@@ -26,6 +29,8 @@ const useWorkouts = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["workouts"] });
+      setSelectOption("reset");
+      setSort("date-desc");
     },
     //@ts-expect-error ignore
     onError: ({ response }: unknown) => {
