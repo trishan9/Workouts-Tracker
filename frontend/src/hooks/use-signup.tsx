@@ -5,10 +5,11 @@ import { useToast } from "@/components/ui/use-toast";
 
 const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-interface SignupProps {
+export interface SignupProps {
   name: string;
   email: string;
   password: string;
+  avatar: string;
 }
 
 const useSignup = () => {
@@ -17,7 +18,11 @@ const useSignup = () => {
 
   const mutation = useMutation({
     mutationFn: async (payload: SignupProps) => {
-      return await axios.post(`${VITE_API_BASE_URL}/api/auth/signup`, payload);
+      return await axios.post(`${VITE_API_BASE_URL}/api/auth/signup`, payload, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
     },
     onSuccess: () => {
       navigate("/login");

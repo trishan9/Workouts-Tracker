@@ -3,6 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
 import useSignup from "@/hooks/use-signup";
+import spinner from "@/assets/spinner.gif";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -17,6 +18,9 @@ import {
 import { Input } from "@/components/ui/input";
 
 const formSchema = z.object({
+  avatar: z.string().min(1, {
+    message: "Profile Picture is required",
+  }),
   name: z.string().min(4, {
     message: "Name must be at least 4 characters.",
   }),
@@ -32,6 +36,7 @@ const SignupForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      avatar: "",
       name: "",
       email: "",
       password: "",
@@ -40,18 +45,35 @@ const SignupForm = () => {
 
   const { createUser, isPending } = useSignup();
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+  //@ts-expect-error ignore
+  function onSubmit(values: z.infer<typeof formSchema>, event) {
+    values.avatar = event.target.avatar.files[0];
     createUser(values);
-  }
-
-  if (isPending) {
-    console.log("Loading...");
   }
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <FormField
+          control={form.control}
+          name="avatar"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Profile Picture</FormLabel>
+
+              <FormControl>
+                <Input id="picture" type="file" accept="image/*" {...field} />
+              </FormControl>
+
+              <FormDescription>
+                This is your public profile picture.
+              </FormDescription>
+
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
         <FormField
           control={form.control}
           name="name"
@@ -109,8 +131,14 @@ const SignupForm = () => {
             </FormItem>
           )}
         />
-
-        <Button type="submit">Create Account</Button>
+        <Button
+          disabled={isPending}
+          type="submit"
+          className="flex items-center gap-2"
+        >
+          Create Account
+          {isPending && <img src={spinner} className="w-6" />}
+        </Button>
       </form>
     </Form>
   );

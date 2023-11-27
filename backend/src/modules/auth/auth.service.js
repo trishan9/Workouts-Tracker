@@ -59,10 +59,10 @@ const getMe = async (id) => {
     if (!user) {
         throw Error("User doesn't exists!")
     }
-    console.log(user)
     return {
         name: user.name,
-        email: user.email
+        email: user.email,
+        avatar: user.avatar
     }
 }
 

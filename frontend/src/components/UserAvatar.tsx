@@ -1,6 +1,6 @@
 import useLogout from "@/hooks/use-logout";
 
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,6 +16,7 @@ interface User {
   user: {
     email: string;
     name: string;
+    avatar: string;
   };
 }
 
@@ -28,6 +29,12 @@ const UserAvatar = ({ user }: { user: User }) => {
       <DropdownMenuTrigger asChild>
         <Avatar className="cursor-pointer">
           <AvatarFallback>{user.user.name[0]}</AvatarFallback>
+
+          <AvatarImage
+            src={user.user.avatar}
+            alt={user.user.name}
+            className="object-cover"
+          />
         </Avatar>
       </DropdownMenuTrigger>
 

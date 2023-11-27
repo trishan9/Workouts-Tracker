@@ -14,7 +14,7 @@ const Login: FC = () => {
   }
 
   return (
-    <div className="m-auto max-w-[30rem] my-48 sm:my-32 px-6">
+    <div className="m-auto max-w-[30rem] my-28 sm:my-32 px-6">
       <p className="mb-4 text-xl sm:text-2xl">Log in to Workouts Tracker</p>
 
       <div className="p-6 border rounded-md bg-background">
