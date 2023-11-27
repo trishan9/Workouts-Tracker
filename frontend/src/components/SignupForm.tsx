@@ -1,6 +1,8 @@
+import { useState } from "react";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { EyeIcon, EyeOffIcon } from "lucide-react";
 
 import useSignup from "@/hooks/use-signup";
 import spinner from "@/assets/spinner.gif";
@@ -33,6 +35,11 @@ const formSchema = z.object({
 });
 
 const SignupForm = () => {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleShowPassword = () => {
+    setShowPassword((prevState) => !prevState);
+  };
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -118,12 +125,24 @@ const SignupForm = () => {
           control={form.control}
           name="password"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="relative">
               <FormLabel>Password</FormLabel>
 
               <FormControl>
-                <Input {...field} type="password" />
+                <Input {...field} type={showPassword ? "text" : "password"} />
               </FormControl>
+
+              <button
+                type="button"
+                className="absolute right-0 mr-2 top-[32px]"
+                onClick={handleShowPassword}
+              >
+                {showPassword ? (
+                  <EyeIcon className="w-4" />
+                ) : (
+                  <EyeOffIcon className="w-4" />
+                )}
+              </button>
 
               <FormDescription>This is your private password.</FormDescription>
 

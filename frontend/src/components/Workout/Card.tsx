@@ -1,5 +1,6 @@
 import { Trash2Icon } from "lucide-react";
 
+import getTimeAgo from "@/lib/timeAgo";
 import useWorkouts from "@/hooks/use-workouts";
 
 import { AlertDialog, AlertDialogTrigger } from "@/components/ui/alert-dialog";
@@ -39,8 +40,6 @@ const WorkoutCard = ({ data }: { data: WorkoutProps }) => {
       </div>
 
       <div className="flex flex-col items-end">
-        <p className="mb-6 text-sm">{data.createdAt.slice(0, 10)}</p>
-
         <AlertDialog>
           <AlertDialogTrigger asChild>
             <button className="p-2 border rounded-sm active:scale-105 bg-secondary hover:bg-secondary/80">
@@ -53,6 +52,8 @@ const WorkoutCard = ({ data }: { data: WorkoutProps }) => {
             handleClick={() => handleDelete(data._id)}
           />
         </AlertDialog>
+
+        <p className="mt-6 text-sm">{getTimeAgo(data.createdAt)}</p>
       </div>
     </div>
   );
