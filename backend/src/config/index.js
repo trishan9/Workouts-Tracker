@@ -9,6 +9,11 @@ export default {
             uri: process.env.MONGODB_URI
         }
     },
+    session: {
+        secret: "workouts-tracker-session-secret",
+        resave: false,
+        saveUninitialized: false
+    },
     jwt: {
         accessToken: {
             secret: process.env.JWT_ACCESS_SECRET,
@@ -18,7 +23,8 @@ export default {
     oauth: {
         google: {
             client_id: process.env.GOOGLE_CLIENT_ID,
-            client_secret: process.env.GOOGLE_CLIENT_SECRET
+            client_secret: process.env.GOOGLE_CLIENT_SECRET,
+            callback_url: "/api/auth/google/callback"
         }
     },
     cloudinary: {
