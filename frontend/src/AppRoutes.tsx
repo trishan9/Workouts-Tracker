@@ -6,6 +6,7 @@ import { Home, Login, Signup } from "@/pages";
 import { Toaster } from "@/components/ui/toaster";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import NavBar from "@/components/NavBar";
+import Callback from "./pages/Callback";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +28,8 @@ const AppRoutes = () => {
                 </ProtectedRoute>
               }
             />
+
+            <Route path="/callback" element={<Callback />} />
 
             <Route path="/login" element={<Login />} />
 

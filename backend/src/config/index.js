@@ -2,7 +2,8 @@ import "dotenv/config"
 
 export default {
     app: {
-        port: process.env.PORT
+        port: process.env.PORT,
+        frontend_uri: process.env.FRONTEND_URI
     },
     database: {
         mongodb: {

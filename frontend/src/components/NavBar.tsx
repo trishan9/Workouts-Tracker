@@ -25,9 +25,11 @@ const NavBar = () => {
 
   return (
     <nav className="flex items-center justify-between w-full p-6 bg-primary">
-      <h1 className="text-xl sm:text-2xl text-primary-foreground">
-        Workouts Tracker
-      </h1>
+      <Link to="/">
+        <h1 className="text-xl font-bold sm:text-2xl text-primary-foreground">
+          Workouts Tracker
+        </h1>
+      </Link>
 
       {!token && (
         <ul className="flex gap-8 sm:text-[18px] font-medium text-primary-foreground items-center">
