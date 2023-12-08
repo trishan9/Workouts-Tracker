@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import WorkoutCard from "./Card";
 import AddWorkoutForm from "./CreateForm";
 import WorkoutSort from "./Sort";
-import DatePicker from "./DatePicker";
 
 interface IWorkouts {
   _id: string;
@@ -30,8 +29,6 @@ const Workouts = ({
       <div className="flex flex-col w-full gap-6">
         <div className="flex items-center justify-between">
           <WorkoutSort />
-
-          <DatePicker />
         </div>
 
         <div className="grid w-full grid-cols-1 content-start gap-6 xl:grid-cols-2 2xl:grid-cols-3 sm:min-h-[456px]">

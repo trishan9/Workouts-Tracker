@@ -25,7 +25,7 @@ export default {
         google: {
             client_id: process.env.GOOGLE_CLIENT_ID,
             client_secret: process.env.GOOGLE_CLIENT_SECRET,
-            callback_url: "/api/auth/google/callback"
+            callback_url: "https://enthusiastic-umbrella-newt.cyclic.app/api/auth/google/callback"
         }
     },
     cloudinary: {
